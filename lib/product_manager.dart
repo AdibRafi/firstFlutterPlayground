@@ -1,59 +1,60 @@
 import 'package:flutter/material.dart';
 
-import 'products.dart';
+import './products.dart';
+import './product_control.dart';
 
 class ProductManager extends StatefulWidget {
   final String startingProduct;
+  final String startingImage;
 
-  ProductManager({this.startingProduct = 'Sweets Tester'}){
-    print('[ProductManager Widget] Constructor');
+  ProductManager(
+      {this.startingProduct = 'Sweets Tester',
+      this.startingImage = 'assets/food2.jpg'}) {
   }
 
   @override
   State<StatefulWidget> createState() {
-    print('[ProductManager Widget] createState()');
     return _ProductManagerState();
   }
-
-
 }
 
 class _ProductManagerState extends State<ProductManager> {
-  List<String> _products = [];
+  final List<String> _products = [];
+  final List<String> _imageList = [];
 
   @override
   void initState() {
-    print('[ProductManager State] initState()');
     _products.add(widget.startingProduct);
+    _imageList.add(widget.startingImage);
     super.initState();
   }
+
   @override
   void didUpdateWidget(covariant ProductManager oldWidget) {
-    print('[ProductManager State] didUpdateWidget');
-    // TODO: implement didUpdateWidget
     super.didUpdateWidget(oldWidget);
   }
 
-  
+  void _addProducts(String product) {
+    setState(() {
+      _products.add(product);
+    });
+  }
+
+  void _addImage(String image) {
+    setState(() {
+      _imageList.add(image);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    print('[ProductManager State] build');
     return Column(
       children: [
         Container(
-          margin: EdgeInsets.all(10.0),
-          child: ElevatedButton(
-            onPressed: () {
-              setState(() {
-                _products.add('Advance Food Tester');
-              });
-            },
-            child: Text('Add product'),
-          ),
-        ),
-        Products(_products)
+            margin: EdgeInsets.all(10.0),
+            child: ProductControl(_addProducts, _addImage)),
+        Products(_products, _imageList)
       ],
     );
   }
-} 
+}

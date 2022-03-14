@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import './products.dart';
+import 'products.dart';
 
 class ProductManager extends StatefulWidget {
   final String startingProduct;

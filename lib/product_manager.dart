@@ -11,7 +11,7 @@ class ProductManager extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    print('[ProductManager Widget] createState(sd)');
+    print('[ProductManager Widget] createState()');
     return _ProductManagerState();
   }
 
